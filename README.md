@@ -1,6 +1,6 @@
-# Summer 2 2025 CS 3200 Project Template
+# Fall 2025 CS 3200 Project Template
 
-This is a template repo CS 3200 Summer 2 2025 Course Project. 
+This is a template repo Fontenot's Fall 2025 CS 3200 Course Project. 
 
 It includes most of the infrastructure setup (containers), sample databases, and example UI pages. Explore it fully and ask questions!
 
@@ -8,17 +8,26 @@ It includes most of the infrastructure setup (containers), sample databases, and
 
 - A GitHub Account
 - A terminal-based git client or GUI Git client such as GitHub Desktop or the Git plugin for VSCode.
-- VSCode with the Python Plugin installed
-- A distribution of Python running on your laptop. The distribution supported by the course is Anaconda or Miniconda.
-  - Create a new Python 3.11 environment in conda named `db-proj` by running:  
+- A distribution of Python running on your laptop. The distribution supported by the course is [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
+  - Create a new Python 3.11 environment in `conda` named `db-proj` by running:  
      ```bash
      conda create -n db-proj python=3.11
      ```
   - Install the Python dependencies listed in `api/requirements.txt` and `app/src/requirements.txt` into your local Python environment. You can do this by running `pip install -r requirements.txt` in each respective directory.
+     ```bash
+     cd api
+     pip install -r requirements.txt
+     cd ../app
+     pip install -r requirements.txt
+     ```
+     Note that the `..` means go to the parent folder of the folder you're currently in (which is `api/` after the first command)
+- VSCode with the Python Plugin installed
+  - You may use some other Python/code editor.  However, Course staff will only support VS Code. 
+
 
 ## Structure of the Repo
 
-- The repo is organized into five main directories:
+- This repository is organized into five main directories:
   - `./app` - the Streamlit app
   - `./api` - the Flask REST API
   - `./database-files` - SQL scripts to initialize the MySQL database
