@@ -210,3 +210,32 @@ def get_ngo_donors(ngo_id):
         return jsonify(donors), 200
     except Error as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@ngos.route("/ngos/count", methods=["GET"])
+def get_top_donors():
+    """
+    Returns the top 3 donors across all NGOS by total donations amount.
+    Includes donor name, type, and amount donated
+    """
+    try:
+        current_app.logger.info('Starting get_top_donors request')
+        cursor = db.get_db().cursor()
+
+        query = """
+        SELECT Donor_Name, Donor_Type, SUM(Amount_Donated) AS amount_donated
+        FROM Donors
+        GROUP BY Donor_ID, Donor_Name, Donor_Type
+        ORDER BY amount_donated DESC
+        LIMIT 3
+        """
+
+        cursor.execute(query)
+        top_donors = cursor.fetchall()
+        cursor.close()
+
+        current_app.logger.info(f'Successfully retrieved top {len(top_donors)} donors')
+        return jsonify(top_donors), 200
+    except Error as e:
+        current_app.logger.error(f'Database error in get_top_donors: {str(e)}')
+        return jsonify({"error": str(e)}), 500
